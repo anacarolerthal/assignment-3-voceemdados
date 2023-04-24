@@ -1,0 +1,53 @@
+/* CSS da página */
+
+body {
+  background-color: #000000;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+
+}
+
+h1{
+  font-size: 70px;
+  color:  #FFFFFF;
+  font-family: Impact;
+  text-align:center;
+   padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+h2{
+  font-size: 30px;
+  color:  #53B780;
+  font-family: Impact;
+  text-align:center;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+
+.topmargin {
+     margin-top: 3cm;
+  }
+  
+ .topmargin2 {
+     margin-top: 1.5cm;
+  }
+  
+ .dark-article {
+  padding: 15px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  background-color: #53B780;
+  border-radius: 10px;
+  color: snow;
+}
+
+.viz {
+	width: 500px;
+	height: 500px;
+}

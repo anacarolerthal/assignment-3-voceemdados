@@ -6,7 +6,6 @@ var viz1 = d3.select("#viz")
     .attr("width", width)
     .attr("height", height);
 	
-
 var projection = d3.geoMercator()
   .center([-43.1729, -22.9068]) // centro em RJ
   .scale(7500)
@@ -18,34 +17,85 @@ var path = d3.geoPath()
   .projection(projection);
   
 var colorScale = d3.scaleLinear()
-.domain([0, 10])
+.domain([5, 10])
 .range(["white", "#5E50D9"]);
 
-  // Preparar os dados
-  var dadosPorAno = d3.nest()
-    .key(function(d) { return d.data.getFullYear(); })
-    .entries(data);
-	
-	
-var slider = d3.select("#slider")
-  .on("input", function() {
-    var anoSelecionado = this.value;
-    var dadosFiltrados = dadosPorAno.find(function(d) { return d.key == anoSelecionado; }).values;
-    atualizarVisualizacao(dadosFiltrados);
-  });
 
+var brush = d3.brush()
+  .extent([[0, 0], [width, height]])
+
+var brushGroup = viz1.append("g")
+  .attr("class", "brush")
+ 
+var selectedYear = "2020"; 
+
+  
 d3.queue()
   .defer(d3.json, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/cidades.geojson")
-  .defer(d3.csv, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/apgar1Mean.csv", function(d) {    
+  .defer(d3.csv, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/apgar1Mean_" + selectedYear + ".csv", function(d) {    
 	data.set(d.id_municipio.replace("$", ""), 
 	{apgar1: +d.apgar1,
       nome_municipio: d.nome_municipio,
-	  ano: new Date(d.ano)})
+	  year: d.ano
+	  })
 	;})
   .await(ready);
   
 console.log(data);
 
+d3.select("#year") // listen for changes to the year dropdown menu
+  .on("change", function() {
+    selectedYear = this.value;
+    updateData(selectedYear);
+  });
+
+
+brushGroup.call(brush);
+
+function updateData(year) {
+	console.log(year)
+d3.queue()
+  .defer(d3.json, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/cidades.geojson")
+  .defer(d3.csv, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/apgar1Mean_" + year + ".csv", function(d) {    
+	data.set(d.id_municipio.replace("$", ""), 
+	{apgar1: +d.apgar1,
+      nome_municipio: d.nome_municipio,
+	  year: d.ano
+	  })
+	;})
+  .await(function(error, topo) {
+      if (error) throw error;
+
+      // Clear the existing paths
+      viz1.selectAll("path").remove();
+
+      // Redraw the visualization with the updated data
+      viz1.selectAll("path")
+        .data(topo.features)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .attr("stroke", "white")
+        .attr("fill", function(d) {
+          var cityData = data.get(d.properties.id_municipio);
+          return cityData ? colorScale(cityData.apgar1) : "gray";
+        })
+        .on("mouseover", function() {
+          d3.select(this)
+            .attr("stroke", "red");
+        })
+        .on("mouseout", function() {
+          d3.select(this)
+            .attr("stroke", "white");
+        })
+        .append("svg:title")
+        .style("fill", "red")
+        .text(function(d) {
+          var cityData = data.get(d.properties.id_municipio);
+          return (cityData && cityData.nome_municipio) ? (cityData.nome_municipio + ": " + cityData.apgar1) : "N/A";
+        });
+    });
+}
 
 function ready(error, topo) {
   viz1.selectAll("path")
@@ -54,15 +104,13 @@ function ready(error, topo) {
     .append("path")
     .attr("d", path)
     .attr("stroke", "white")
-    .attr("stroke-width", 2)
     .attr("fill", function(d) {
       var cityData = data.get(d.properties.id_municipio);
       return cityData ? colorScale(cityData.apgar1) : "gray";
     })
     .on("mouseover", function() {
       d3.select(this)
-        .attr("stroke", "red")
-        .attr("stroke-width", 2);
+        .attr("stroke", "red");
     })
     .on("mouseout", function() {
       d3.select(this)
@@ -75,7 +123,6 @@ function ready(error, topo) {
       return (cityData && cityData.nome_municipio) ? (cityData.nome_municipio + ": " + cityData.apgar1) : "N/A";
     });
 }
-
 
 var legendWidth = 20;
 var legendHeight = 200;

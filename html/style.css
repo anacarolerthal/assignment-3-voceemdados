@@ -8,6 +8,7 @@ body {
   font-size: 20px;
   color: white;
   text-align: center;
+  text-justify: auto;
 
 }
 
@@ -27,6 +28,15 @@ h2{
   text-align:center;
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+h3{
+  font-size: 40px;
+  color:  #FFFFFF;
+  font-family: Impact;
+  text-align:center;
+   padding-top: 5px;
+  padding-bottom: 2px;
 }
 
 

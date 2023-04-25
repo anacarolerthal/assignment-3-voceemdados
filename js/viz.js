@@ -1,5 +1,5 @@
 var width = 960;
-var height = 600;
+var height = 400;
 
 var svg = d3.select("#viz")
     .append("svg")
@@ -8,20 +8,26 @@ var svg = d3.select("#viz")
 
 d3.json("https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/cidades.geojson").then(function(data) {
   var projection = d3.geoMercator()
-      .scale(7400)
-      .center([-43.1729, -22.9068])
-      .translate([width / 2, height / 2]);
+      .center([-43.1729, -22.9068]) // centro em RJ
+      .scale(7500)
+      .translate([width / 2, height / 2+110]);
 
   var path = d3.geoPath()
       .projection(projection);
 
-  svg.append("path")
-      .datum(data)
+  svg.selectAll("path")
+      .data(data.features)
+      .enter()
+      .append("path")
       .attr("d", path)
-      .attr("fill", "none")
-      .attr("stroke", "white");
+      .attr("stroke", "white")
+      .on("mouseover", function() {
+          d3.select(this).attr("stroke", "red");
+      })
+      .on("mouseout", function() {
+          d3.select(this).attr("stroke", "white");
+      });
 });
-
 
 
 

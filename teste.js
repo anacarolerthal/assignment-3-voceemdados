@@ -1,12 +1,12 @@
 var width = 960;
 var height = 600;
 
-var svg = d3.select("body")
+var svg = d3.select("#viz2")
     .append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("cidades.geojson").then(function(data) {
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(data) {
   var projection = d3.geoMercator()
       .scale(1000)
       .translate([width / 2, height / 2]);
@@ -15,7 +15,7 @@ d3.json("cidades.geojson").then(function(data) {
       .projection(projection);
 
   svg.append("path")
-      .data(data)
+      .datum(data)
       .attr("d", path)
       .attr("fill", "none")
       .attr("stroke", "black");

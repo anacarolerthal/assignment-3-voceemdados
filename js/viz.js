@@ -134,31 +134,61 @@ legendTicks.append("text")
 // Position the legend
 legend.attr("transform", "translate(" + (550) + "," + (-350) + ")");
 
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 500 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-
-const data2 = [10, 20, 30, 40, 50];
-
-const svg2 = d3.select("#viz2")
+// append the svg object to the body of the page
+var svg = d3.select("#viz2")
   .append("svg")
-  .attr("width", 500)
-  .attr("height", 500);
-
-const pie2 = d3.pie()(data2);
-
-const arc2 = d3.arc()
-  .innerRadius(0)
-  .outerRadius(200);
-
-const colors2 = d3.scaleOrdinal()
-  .range(d3.schemeCategory10);
-
-const arcs2 = svg2.selectAll("g.arc")
-  .data(pie2)
-  .enter()
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
   .append("g")
-  .attr("class", "arc")
-  .attr("transform", "translate(250, 250)");
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-arcs2.append("path")
-  .attr("fill", (d, i) => colors2(i))
-  .attr("d", arc2);
+// get the data
+d3.csv("https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/apgar1Mean_Combined.csv", function(data) {
+  console.log(data);
+  // X axis: scale and draw:
+  var x = d3.scaleLinear()
+      .domain([0, 10])    
+      .range([0, width]);
+  svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .style("fill", "white")
+      .style("font-size", "12px");
+
+  // set the parameters for the histogram
+  var histogram = d3.histogram()
+      .value(function(d) { return d.apgar1; })   // I need to give the vector of value
+      .domain(x.domain())  // then the domain of the graphic
+      .thresholds(x.ticks(10)); // then the numbers of bins
+
+  // And apply this function to data to get the bins
+  var bins = histogram(data);
+
+  // Y axis: scale and draw:
+  var y = d3.scaleLinear()
+      .range([height, 0]);
+      y.domain([0, d3.max(bins, function(d) { return d.length; })]);  
+  svg.append("g")
+      .call(d3.axisLeft(y))
+      .selectAll("text")
+      .style("fill", "white")
+      .style("font-size", "12px");
+
+  // append the bar rectangles to the svg element
+  svg.selectAll("rect")
+      .data(bins)
+      .enter()
+      .append("rect")
+        .attr("x", 1)
+        .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
+        .attr("width", function(d) { return x(d.x1) - x(d.x0) - 2 ; })
+        .attr("height", function(d) { return height - y(d.length); })
+        .style("fill", "white")
+
+});

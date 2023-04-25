@@ -6,9 +6,10 @@ var svg = d3.select("#viz2")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(function(data) {
+d3.json("https://raw.githubusercontent.com/fgv-vis-2023/assignment-3-voceemdados/main/cidades.geojson?token=GHSAT0AAAAAAB66AVIDSXQDR6VW6YPB3MKSZCHDEDQ").then(function(data) {
   var projection = d3.geoMercator()
-      .scale(1000)
+      .scale(5000)
+      .center([-43.1729, -22.9068])
       .translate([width / 2, height / 2]);
 
   var path = d3.geoPath()

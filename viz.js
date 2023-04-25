@@ -1,31 +1,26 @@
-var width = 500
-var height = 500
+var width = 960;
+var height = 600;
 
-var svg1 = d3.select("#viz")
-	.append("svg")
+var svg = d3.select("#viz")
+    .append("svg")
     .attr("width", width)
     .attr("height", height);
-	
-// Map and projection
-var projection = d3.geoNaturalEarth1()
-    .scale(width / 1.3 / Math.PI)
-    .translate([width / 2, height / 2]);
 
-// Load external data and boot
-d3.json("cidades.geojson", function(data){
+d3.json("https://raw.githubusercontent.com/fgv-vis-2023/assignment-3-voceemdados/main/cidades.geojson?token=GHSAT0AAAAAAB66AVIDSXQDR6VW6YPB3MKSZCHDEDQ").then(function(data) {
+  var projection = d3.geoMercator()
+      .scale(7400)
+      .center([-43.1729, -22.9068])
+      .translate([width / 2, height / 2]);
 
-    // Draw the map
-    svg1.append("g")
-        .selectAll("path")
-        .data(data.features)
-        .enter().append("path")
-            .attr("fill", "#69b3a2")
-            .attr("d", d3.geoPath()
-                .projection(projection)
-            )
-            .style("stroke", "#fff")
-})
+  var path = d3.geoPath()
+      .projection(projection);
 
+  svg.append("path")
+      .datum(data)
+      .attr("d", path)
+      .attr("fill", "none")
+      .attr("stroke", "white");
+});
 
 
 

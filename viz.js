@@ -17,7 +17,7 @@ var path = d3.geoPath()
   .projection(projection);
   
 var colorScale = d3.scaleLinear()
-.domain([5, 10])
+.domain([0, 10])
 .range(["white", "#5E50D9"]);
 
 
@@ -40,7 +40,34 @@ d3.queue()
 	  })
 	;})
   .await(ready);
-  
+
+function ready(error, topo) {
+    viz1.selectAll("path")
+      .data(topo.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("stroke", "transparent")
+      .attr("fill", function(d) {
+        var cityData = data.get(d.properties.id_municipio);
+        return cityData ? colorScale(cityData.apgar1) : "gray";
+      })
+      .on("mouseover", function() {
+        d3.select(this)
+          .attr("stroke", "red");
+      })
+      .on("mouseout", function() {
+        d3.select(this)
+          .attr("stroke", "transparent");
+      })
+      .append("svg:title")
+      .style("fill", "red")
+      .text(function(d) {
+        var cityData = data.get(d.properties.id_municipio);
+        return (cityData && cityData.nome_municipio) ? (cityData.nome_municipio + ": " + cityData.apgar1) : "N/A";
+      });
+  }
+
 console.log(data);
 
 d3.select("#year") // listen for changes to the year dropdown menu
@@ -75,7 +102,7 @@ d3.queue()
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("stroke", "white")
+        .attr("stroke", "transparent")
         .attr("fill", function(d) {
           var cityData = data.get(d.properties.id_municipio);
           return cityData ? colorScale(cityData.apgar1) : "gray";
@@ -86,7 +113,7 @@ d3.queue()
         })
         .on("mouseout", function() {
           d3.select(this)
-            .attr("stroke", "white");
+            .attr("stroke", "transparent");
         })
         .append("svg:title")
         .style("fill", "red")
@@ -97,32 +124,7 @@ d3.queue()
     });
 }
 
-function ready(error, topo) {
-  viz1.selectAll("path")
-    .data(topo.features)
-    .enter()
-    .append("path")
-    .attr("d", path)
-    .attr("stroke", "white")
-    .attr("fill", function(d) {
-      var cityData = data.get(d.properties.id_municipio);
-      return cityData ? colorScale(cityData.apgar1) : "gray";
-    })
-    .on("mouseover", function() {
-      d3.select(this)
-        .attr("stroke", "red");
-    })
-    .on("mouseout", function() {
-      d3.select(this)
-        .attr("stroke", "white");
-    })
-    .append("svg:title")
-    .style("fill", "red")
-    .text(function(d) {
-      var cityData = data.get(d.properties.id_municipio);
-      return (cityData && cityData.nome_municipio) ? (cityData.nome_municipio + ": " + cityData.apgar1) : "N/A";
-    });
-}
+
 
 var legendWidth = 20;
 var legendHeight = 200;

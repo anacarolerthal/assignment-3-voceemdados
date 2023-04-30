@@ -4,15 +4,19 @@
 <html lang="pt-br">
 	<head>
 	<meta charset="UTF-8"/>
+    <!-- Compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
 	<link href="style.css" rel="stylesheet"/>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<title> Você em dados </title>
-	
-	</head>
-	
 
-	
+	</head>
+
+
+
     <body>
 	<h1> Você em dados </h1>
 	<h2> Rio de Janeiro </h2>
@@ -21,20 +25,11 @@
         <div class="row">
 			<div class="main-right col-md-2">
 			<div class="topmargin">
-			
-				
-		<p> Índice de Apgar</p>
-			
-				<label for="year">Selecione um ano:</label>
-					<select id="year">
-					<option value="2020" selected>2020</option>
-					<option value="2019">2019</option>
-					<option value="2018">2018</option>
-					<option value="2018">2017</option>
-					<option value="2018">2016</option>
-					<!-- add more options for other years as needed -->
-					</select>
 
+		<p> Índice de Apgar</p>
+				<!-- Slider for year selection -->
+				<input type="range" min="1998" max="2020" value="2020" class="slider" id="year">
+				<button id="play-button">Play</button>
 			</div>
 			</div>
 
@@ -73,6 +68,9 @@
 	</div>
 	
 	<script src="viz.js"></script>
+
+
+
     </body>
 	
 	

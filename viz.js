@@ -2,6 +2,12 @@ var width = 800;
 var height = 440;
 
 var cityId = 0;
+var inputSexo = 0;
+var boolsexo = False;
+var inputParto = 0;
+var inputPeso = 0;
+var inputData = 0;
+
 
 var viz = d3.select("#viz")
     .append("svg")
@@ -180,6 +186,18 @@ getData(selectedYear);
 
 //Start of viz2 code
 
+// Listeners to other inputs
+{
+  d3.select("#inputPeso").on("input", function() {
+    inputPeso = this.value;
+    draw_histogram(selectedYear);
+    
+  });
+
+
+
+}
+
 var width2 = 400
 var height2 = 400
 
@@ -196,8 +214,9 @@ function draw_histogram(selectedYear) {
   viz2.selectAll("*").remove();
   // filter data to match cityId
   data = data.filter(function(d) {
-    return d.id_municipio == cityId;
+    return d.id_municipio == cityId, d.peso == inputPeso;
   });
+
   var x = d3.scaleLinear()
       .domain([0, 10])
       .range([0, width2]);

@@ -2,9 +2,10 @@ var width = 800;
 var height = 440;
 
 var cityId = 0;
-var inputSexo = "Feminino";
-var inputParto = "Vaginal";
-var inputPeso = 3000;
+var inputSexo = "all";
+var inputParto = "all";
+var inputPesoMin = 0;
+var inputPesoMax = 10000;
 var inputData = "oi";
 
 
@@ -246,15 +247,24 @@ function draw_histogram(selectedYear) {
   viz2.selectAll("*").remove();
   // filter data to match cityId
   data = data.filter(function(d) {
+    if (cityId == 0) {
+      return true;
+    }
     return d.id_municipio == cityId;
   });
   data = data.filter(function(d) {
     return d.peso >= inputPesoMin && d.peso <= inputPesoMax;
   });
   data = data.filter(function(d) {
+    if (inputSexo == "all") {
+      return true;
+    }
     return d.sexo == inputSexo;
   });
   data = data.filter(function(d) {
+    if (inputParto == "all") {
+      return true;
+    }
     return d.tipo_parto == inputParto;
   });
 

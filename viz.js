@@ -7,6 +7,7 @@ var inputParto = "all";
 var inputPesoMin = 0;
 var inputPesoMax = 10000;
 var inputData = "all";
+var inputMae = "all";
 
 
 var viz = d3.select("#viz")
@@ -227,6 +228,14 @@ getData(selectedYear);
       draw_histogram(selectedYear);
 });
 
+// listener mother age
+  // listener parto
+  d3.select("#inputMae")
+    .on("change", function() {
+      inputMae = this.value;
+      draw_histogram(selectedYear);
+  });
+
 
 }
 //End of viz1 code
@@ -255,7 +264,7 @@ function draw_histogram(selectedYear) {
     return d.id_municipio == cityId;
   });
   data = data.filter(function(d) {
-    return d.peso >= inputPesoMin && d.peso <= inputPesoMax;
+    return d.peso >= 3200 && d.peso <= 3300;
   });
   data = data.filter(function(d) {
     if (inputSexo == "all") {
@@ -275,6 +284,12 @@ function draw_histogram(selectedYear) {
       return true;
     }
     return d.data_nascimento.toString() == inputData;
+  });
+  data = data.filter(function(d) {
+    if (inputMae == "all") {
+      return true;
+    }
+    return parseInt(d.idade_mae) == parseInt(inputMae);
   });
 
   var x = d3.scaleLinear()
@@ -332,14 +347,14 @@ function draw_histogram(selectedYear) {
       .style("font-size", "15px")
       .text("Histograma do Apgar 1 em "+ selectedYear);
 
-    city_showing = cityId == 0 ? "Todos" : data[0].nome_municipio;
+    city_showing = cityId == 0 ? "Todos os municípios" : data[0].nome_municipio;
     viz2.append("text")
       .attr("x", (width2 / 2))
       .attr("y", 20)
       .attr("text-anchor", "middle")
       .style("fill", "white")
       .style("font-size", "15px")
-      .text("Município de " + city_showing);
+      .text(city_showing);
 
     viz2.append("text")
       .attr("x", (width2 / 2))

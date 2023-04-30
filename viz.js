@@ -186,7 +186,7 @@ var height2 = 400
 var viz2 = d3.select("#viz2")
     .append("svg")
     .attr("width", 600)
-    .attr("height", 800)
+    .attr("height", 500)
     .append("g")
     .attr("transform", "translate(" + 60 + "," + 10 + ")");
 
@@ -206,7 +206,6 @@ function draw_histogram(selectedYear) {
       .attr("transform", "translate(0," + height2 + ")")
       .call(d3.axisBottom(x))
       .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end")
         .style("fill", "white")
         .style("font-size", "12px");
@@ -233,7 +232,7 @@ function draw_histogram(selectedYear) {
     viz2.append("g")
       .call(d3.axisLeft(y))
       .selectAll("text")
-      .style("fill", "#69b3a2")
+      .style("fill", "white")
       .style("font-size", "12px");
 
     viz2.selectAll("rect")
@@ -244,8 +243,43 @@ function draw_histogram(selectedYear) {
         .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
         .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
         .attr("height", function(d) { return height2 - y(d.length); })
-        .style("fill", "white")
+        .style("fill", "#965BF0")
+    
+    viz2.append("text")
+      .attr("x", (width2 / 2))
+      .attr("y", 1)
+      .attr("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "15px")
+      .text("Histograma do Apgar 1 em "+ selectedYear);
+
+    viz2.append("text")
+      .attr("x", (width2 / 2))
+      .attr("y", 20)
+      .attr("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "15px")
+      .text("Município de " + data[0].nome_municipio);
+
+    viz2.append("text")
+      .attr("x", (width2 / 2))
+      .attr("y", 440)
+      .attr("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "13px")
+      .text("Apgar 1");
+    
+    viz2.append("text")
+      .attr("x", -200)
+      .attr("y", (height2 / 2)-250)
+      .attr("transform", "rotate(-90)")
+      .attr("text-anchor", "middle")
+      .style("fill", "white")
+      .style("font-size", "13px")
+      .text("Número de nascidos vivos");
+
   });
+
 }
 
 draw_histogram(selectedYear);

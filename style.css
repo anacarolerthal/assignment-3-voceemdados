@@ -39,6 +39,14 @@ h3{
   padding-bottom: 2px;
 }
 
+h6{
+  font-size: 20px;
+  color:  #000000;
+  text-align:center;
+   padding-top: 5px;
+  padding-bottom: 2px;
+}
+
 
 .topmargin {
      margin-top: 3cm;
@@ -52,7 +60,7 @@ h3{
   padding: 15px;
   margin-top: 30px;
   margin-bottom: 15px;
-  background-color: #3D1A3D;
+  background-color: #2C2157;
   border-radius: 10px;
   color: snow;
 }

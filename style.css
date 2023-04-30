@@ -70,3 +70,44 @@ h3{
   font-size: 9px;
   fill: black;
 }
+
+.menu {
+  display: flex;
+}
+.menu-option {
+  flex: 1;
+}
+.content {
+  display: none;
+}
+.content.show {
+  display: block;
+}
+
+/* reduce size from btn btn-link bootstrap */
+
+
+
+.btn { 
+  text-decoration: none;
+  color: black;
+}
+
+.iconscollap {
+  margin-right: 10px;
+}
+
+#accordion {
+  /* makes it have shadows */
+  /* important box shadow */
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.6); 
+}
+
+#l_smaller {
+  font-size: 0.7em;
+}
+.card {
+  /* makes it fully squared */
+  border-radius: 0;
+  /* remove shadows */
+}

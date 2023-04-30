@@ -46,14 +46,69 @@
 		</div >
 		
 		<div class="main-right col-md-6 topmargin2" >
-		<p> O Índice de Apgar é um teste realizado nos primeiros minutos de vida de um recém-nascido e permite vigiar a sua saúde global, e a probabilidade de que ele se adapte à vida fora do útero. Uma pontuação total de 7 a 10 é considerada “normal”, e um score Apgar inferior indica vitalidade deprimida, e em geral é um sinal de alerta para os médicos. </p>
-		<div class="datetimething">
-			<input type="datetime-local" placeholder="Data de nascimento" id="nascimento" min="0">
-		</div >
-		<div>
-		<button type="button" class="btn btn-light" onclick="newone()">Inserir dados</button>
-		<button type="button" class="btn btn-light" onclick="choose()">Reiniciar</button>
-		</div >
+			<div id="accordion">
+				<div class="card">
+				  <div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+					  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+						<span class="iconscollap"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/36/null/external-gender-womens-day-flatart-icons-outline-flatarticons.png"/></span>
+						Sexo do bebê
+					  </button>
+					</h5>
+				  </div>
+			  
+				  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="card-body">
+					  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				  </div>
+				</div>
+				<div class="card">
+				  <div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+					  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						<span class="iconscollap"><img src="https://img.icons8.com/external-icongeek26-outline-icongeek26/36/null/external-weight-pregnancy-amp-maternity-icongeek26-outline-icongeek26.png"/></span>
+						Peso ao nascer
+					  </button>
+					</h5>
+				  </div>
+				  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div class="card-body">
+						Tipo de parto
+					</div>
+				  </div>
+				</div>
+				<div class="card">
+				  <div class="card-header" id="headingThree">
+					<h5 class="mb-0">
+					  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+						<span class="iconscollap"><img src="https://img.icons8.com/dotty/36/null/flying-stork-with-bundle.png"/></span>
+						Tipo de parto 
+					  </button>
+					</h5>
+				  </div>
+				  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+					<div class="card-body">
+					  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				  </div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingThree">
+					  <h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" id = "l_smaller">
+						  <span class= "iconscollap"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/36/null/external-birthday-new-year-kiranshastry-lineal-kiranshastry.png"/></span>
+						  Data de Nascimento	
+						</button>
+					  </h5>
+					</div>
+					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+					  <div class="card-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					  </div>
+					</div>
+				  </div>
+			</div>
 		</div >
 		<div class="main-right col-md-12 topmargin2" >
 		<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -69,7 +124,7 @@
     </body>
 	
 	
-	<script>
-
-	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

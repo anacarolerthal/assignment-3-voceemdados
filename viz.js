@@ -1,5 +1,7 @@
-var width = 650;
-var height = 400;
+var width = 800;
+var height = 440;
+
+var cityId = 0;
 
 var viz = d3.select("#viz")
     .append("svg")
@@ -35,9 +37,11 @@ var colorScale = d3.scaleLinear()
   .on("input", function() { 
       selectedYear = this.value;
       getData(selectedYear);
-      draw_histogram(selectedYear);
       d3.select("#year-value").text(selectedYear);
   
+    })
+    .on("change", function() {
+      draw_histogram(selectedYear);
     });
   
   d3.select("#play-button")
@@ -141,9 +145,13 @@ function draw_map(error,d){
         .on("mouseout", function(d) {
             //select all the paths and set their opacity to 1
             d3.selectAll("path").style("opacity", 1);
-        }
-
-    )
+        })
+        .on("click", function(d) {
+          //sets the cityId to the selected city
+          cityId = d.properties.id_municipio;
+          draw_histogram(selectedYear);
+          console.log(cityId);
+        })
     .append("svg:title")
     .style("fill", "red")
     .text(function(d) {
@@ -177,8 +185,8 @@ var height2 = 400
 
 var viz2 = d3.select("#viz2")
     .append("svg")
-    .attr("width", width2)
-    .attr("height", height2)
+    .attr("width", 600)
+    .attr("height", 800)
     .append("g")
     .attr("transform", "translate(" + 60 + "," + 10 + ")");
 
@@ -186,6 +194,10 @@ function draw_histogram(selectedYear) {
   // clear the previous graph
   d3.csv("https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/general/general" + selectedYear + ".csv", function(data) {
   viz2.selectAll("*").remove();
+  // filter data to match cityId
+  data = data.filter(function(d) {
+    return d.id_municipio == cityId;
+  });
   var x = d3.scaleLinear()
       .domain([0, 10])
       .range([0, width2]);
@@ -216,9 +228,8 @@ function draw_histogram(selectedYear) {
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .style("fill", "white")
-      .style("font-size", "12px")
-      .text("Number of cities");
-      
+      .style("font-size", "12px");
+
     viz2.append("g")
       .call(d3.axisLeft(y))
       .selectAll("text")
@@ -238,4 +249,3 @@ function draw_histogram(selectedYear) {
 }
 
 draw_histogram(selectedYear);
-

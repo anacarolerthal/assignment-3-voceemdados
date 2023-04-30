@@ -6,7 +6,7 @@ var inputSexo = "all";
 var inputParto = "all";
 var inputPesoMin = 0;
 var inputPesoMax = 10000;
-var inputData = "oi";
+var inputData = "all";
 
 
 var viz = d3.select("#viz")
@@ -221,11 +221,13 @@ getData(selectedYear);
   // listener data
   d3.select("#inputData")
     .on("change", function() {
-      inputData = this.value;
+      inputData = this.value.toString();
+      console.log(inputData);
+      document.getElementById("data-value").textContent = inputData;
       draw_histogram(selectedYear);
 });
-  
-  d3.select("#data-value").text(inputData.toString());
+
+
 }
 //End of viz1 code
 
@@ -266,6 +268,13 @@ function draw_histogram(selectedYear) {
       return true;
     }
     return d.tipo_parto == inputParto;
+  });
+
+  data = data.filter(function(d) {
+    if (inputData == "all") {
+      return true;
+    }
+    return d.data_nascimento.toString() == inputData;
   });
 
   var x = d3.scaleLinear()

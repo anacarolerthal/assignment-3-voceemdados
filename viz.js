@@ -1,4 +1,4 @@
-var width = 960;
+var width = 650;
 var height = 400;
 
 var viz = d3.select("#viz")
@@ -67,65 +67,52 @@ d3.select("#play-button")
 });
 }
 
-//Sets the legend for the map
-{
-  var legendWidth = 20;
-  var legendHeight = 200;
-  
-  // Define the legend SVG element
-  var legend = d3.select("#viz")
-    .append("svg")
-    .attr("width", legendWidth)
-    .attr("height", legendHeight)
-    .attr("id", "legend");
-  
-  // Define the color scale for the legend
-  var colorScaleLegend = d3.scaleLinear()
-    .domain([0, 10])
-    .range(["white", "#5E50D9"]);
-  
-  // Create a linear gradient for the color legend
-  legend.append("defs")
-    .append("linearGradient")
-    .attr("id", "color-gradient")
-    .attr("x1", 0)
-    .attr("x2", 0)
-    .attr("y1", 1)
-    .attr("y2", 0)
-    .selectAll("stop")
-    .data(colorScaleLegend.range())
-    .enter().append("stop")
-    .attr("offset", function(d,i) { return i/(colorScaleLegend.range().length-1); })
-    .attr("stop-color", function(d) { return d; });
-  
-  // Draw the color legend
-  legend.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", legendWidth)
-    .attr("height", legendHeight)
-    .attr("fill", "url(#color-gradient)");
-  
-  // Add tick marks and labels to the color legend
-  var legendTicks = legend.append("g")
-    .attr("class", "legend-ticks")
-    .selectAll("g")
-    .data(colorScaleLegend.ticks(10))
-    .enter().append("g")
-    .attr("transform", function(d,i) { return "translate(0," + ((i/10)*legendHeight) + ")"; });
-  
-  
-  legendTicks.append("text")
-    .attr("x", 0)
-    .attr("y", legendHeight/10)
-    .attr("dy", -10)
-    .attr("dx", 3)
-    .attr("fill", "white")
-    .text(function(d) { return 10 - d.toFixed(1); });
-    
-  // Position the legend
-  legend.attr("transform", "translate(" + (550) + "," + (-350) + ")");
+// set continuous legend for color scale from 0 to 10
+{var legend = viz.append("g")
+.attr("transform", "translate(0,0)")
+.attr("id", "legend");
+
+var legenditem = legend.selectAll(".legenditem")
+.data(d3.range(10))
+.enter()
+.append("g")
+.attr("class", "legenditem")
+.attr("transform", function(d, i) { return "translate(" + i * 31 + ",10)"; });
+
+legenditem.append("rect")
+.attr("x", width - 350)
+.attr("y", height - 50)
+.attr("width", 30)
+.attr("height", 10)
+.attr("class", "rect")
+.style("fill", function(d, i) { return colorScale(d); });
+
+legenditem.append("text")
+.attr("x", width - 350)
+.attr("y", height - 60)
+.style("text-anchor", "middle")
+.style("fill", "white")
+.style("font-size", "10px")
+.text(function(d, i) { return i * 1; });
+
+legend.append("text")
+.attr("x", width - 40)
+.attr("y", height -50)
+.style("text-anchor", "middle")
+.style("fill", "white")
+.style("font-size", "10px")
+.text("10");
+
+legend.append("text")
+.attr("x", width - 200)
+.attr("y", height -10)
+.style("text-anchor", "middle")
+.style("fill", "white")
+.style("font-size", "15px")
+.text("Média do Apgar 1 por município");
 }
+
+//Draws the map
 function draw_map(error,d){
     console.log(d);
     viz.selectAll("path").remove();
@@ -181,7 +168,7 @@ getData(selectedYear);
 
 //Start of viz2 code
 
-var width2 = 500
+var width2 = 400
 var height2 = 400
 
 var viz2 = d3.select("#viz2")
@@ -205,7 +192,7 @@ function draw_histogram(selectedYear) {
       .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end")
-        .style("fill", "black")
+        .style("fill", "white")
         .style("font-size", "12px");
 
     var histogram = d3.histogram()
@@ -224,7 +211,7 @@ function draw_histogram(selectedYear) {
       .attr("x",0 - (height2 / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .style("fill", "black")
+      .style("fill", "white")
       .style("font-size", "12px")
       .text("Number of cities");
       
@@ -242,7 +229,7 @@ function draw_histogram(selectedYear) {
         .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
         .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
         .attr("height", function(d) { return height2 - y(d.length); })
-        .style("fill", "black")
+        .style("fill", "white")
   });
 }
 

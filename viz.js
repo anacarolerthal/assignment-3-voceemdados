@@ -264,7 +264,7 @@ function draw_histogram(selectedYear) {
     return d.id_municipio == cityId;
   });
   data = data.filter(function(d) {
-    return d.peso >= 3200 && d.peso <= 3300;
+    return d.peso >= inputPesoMin && d.peso <= inputPesoMax;
   });
   data = data.filter(function(d) {
     if (inputSexo == "all") {
@@ -376,5 +376,16 @@ function draw_histogram(selectedYear) {
   });
 
 }
+
+window.addEventListener("scroll",function() { 
+  if(window.scrollY > 500) {
+    var infoButton = document.getElementById('infoButton');
+    infoButton.dataset.target = "#infoModal2";
+  }
+  else {
+    var infoButton = document.getElementById('infoButton');
+    infoButton.dataset.target = "#infoModal1";
+  }
+},false);
 
 draw_histogram(selectedYear);

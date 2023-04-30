@@ -22,6 +22,7 @@ var path = d3.geoPath()
 //Sets the color scale
 var colorScale = d3.scaleLinear()
 .domain([0, 10])
+.domain([0, 10])
 .range(["white", "#5E50D9"]);
 
 //Sets default year and the listener for the year update

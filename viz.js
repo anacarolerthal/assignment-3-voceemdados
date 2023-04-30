@@ -2,11 +2,10 @@ var width = 800;
 var height = 440;
 
 var cityId = 0;
-var inputSexo = 0;
-var boolsexo = False;
-var inputParto = 0;
-var inputPeso = 0;
-var inputData = 0;
+var inputSexo = "Feminino";
+var inputParto = "Vaginal";
+var inputPeso = 3000;
+var inputData = "oi";
 
 
 var viz = d3.select("#viz")
@@ -173,7 +172,7 @@ function getData(givenYear){
   .defer(d3.csv, "https://raw.githubusercontent.com/felipelmc/Nascidos-Vivos-Viz/main/mean/apgar1Mean" + givenYear + ".csv", function(d) {
 	data.set(d.id_municipio.replace("$", ""),
 	{apgar1: d.meanApgar1,
-      nome_municipio: d.nome_municipio,
+    nome_municipio: d.nome_municipio,
 	  year: d.ano
 	  });
   })
@@ -182,21 +181,44 @@ function getData(givenYear){
 
 getData(selectedYear);
 
-//End of viz1 code
-
-//Start of viz2 code
 
 // Listeners to other inputs
 {
-  d3.select("#inputPeso").on("input", function() {
+  // listener peso
+  d3.select("#inputPeso")
+    .on("input", function() {
     inputPeso = this.value;
+  })    
+    .on("change", function() {
     draw_histogram(selectedYear);
-    
   });
 
+  // listener sexo
+  d3.select("#inputSexo")
+    .on("change", function() {
+      inputSexo = this.value;
+      draw_histogram(selectedYear);
+  });
 
+  // listener parto
+  d3.select("#inputParto")
+    .on("change", function() {
+      inputParto = this.value;
+      draw_histogram(selectedYear);
+  });
 
+  // listener data
+  d3.select("#inputData")
+    .on("change", function() {
+      inputData = this.value;
+      draw_histogram(selectedYear);
+});
+  
+  d3.select("#data-value").text(inputData.toString());
 }
+//End of viz1 code
+
+//Start of viz2 code
 
 var width2 = 400
 var height2 = 400
@@ -214,7 +236,16 @@ function draw_histogram(selectedYear) {
   viz2.selectAll("*").remove();
   // filter data to match cityId
   data = data.filter(function(d) {
-    return d.id_municipio == cityId, d.peso == inputPeso;
+    return d.id_municipio == cityId;
+  });
+  data = data.filter(function(d) {
+    return d.peso == parseInt(inputPeso);
+  });
+  data = data.filter(function(d) {
+    return d.sexo == inputSexo;
+  });
+  data = data.filter(function(d) {
+    return d.tipo_parto == inputParto;
   });
 
   var x = d3.scaleLinear()

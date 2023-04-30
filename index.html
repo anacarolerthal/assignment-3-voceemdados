@@ -10,6 +10,7 @@
 	<link href="style.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">    
 	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
 	<title> Você em dados </title>
 
 	</head>
@@ -147,13 +148,21 @@
 				  </div>
 				  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 					<div class="card-body">
-						<h6> Insira aqui seu peso ao nascer: </h6>
+						<h6> Insira aqui um limites para seu peso ao nascer: </h6>
 						<div class="d-flex justify-content-center">
-							<div class="input-group w-auto">
-								<!-- adds 100 by 100 -->
-								<input type="range" min="0" max="5000" value="0" class="slider" id="inputPesoMin" step="100">
-								<input type="range" min="0" max="5000" value="0" class="slider" id="inputPesoMax" step="100">
-								<p> <span id="peso-value"></span> </p>
+							<div class="col-md-16">
+							<h6>Limite inferior</h6>
+							<form>
+								<input type="range" id="inputPesoMin" name="amountRange" min="0" max="5000" value="0" oninput="this.form.amountInput.value=this.value" />
+								<input type="number" id="inputPesoMin" name="amountInput" min="0" max="5000" value="0"  style="width: 8rem" oninput="this.form.amountRange.value=this.value" />
+							</form>
+							</div>
+							<div class="col-md-16">
+							<h6>Limite superior</h6>
+							<form>
+								<input type="range" id="inputPesoMax" name="amountRange" min="0" max="5000" value="5000" oninput="this.form.amountInput.value=this.value" />
+								<input type="number" id="inputPesoMax" name="amountInput" min="0" max="5000" value="5000"  style="width: 8rem" oninput="this.form.amountRange.value=this.value" />
+							</form>
 							</div>
 						</div>
 					</div>
@@ -235,7 +244,7 @@
 			</div>
 		</div >
 		<div class="row" >
-		<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+		<p>O Índice de Apgar é um teste realizado nos primeiros minutos de vida de um recém-nascido que permite vigiar a sua saúde global. O Apgar 1, avaliado aqui, é medido no primeiro minuto de vida de todos os brasileiros, e consiste principalmente em estimar a probabilidade da adaptação do bebê à vida fora do útero. </p>
 		</div>
 		
 		

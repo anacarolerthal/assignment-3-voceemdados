@@ -5,7 +5,7 @@ var cityId = 0;
 var inputSexo = "all";
 var inputParto = "all";
 var inputPesoMin = 0;
-var inputPesoMax = 10000;
+var inputPesoMax = 5000;
 var inputData = "all";
 var inputMae = "all";
 
@@ -252,7 +252,7 @@ var height2 = 400
 
 var viz2 = d3.select("#viz2")
     .append("svg")
-    .attr("width", 600)
+    .attr("width", 470)
     .attr("height", 500)
     .append("g")
     .attr("transform", "translate(" + 60 + "," + 10 + ")");
@@ -297,8 +297,9 @@ function draw_histogram(selectedYear) {
     return parseInt(d.idade_mae) == parseInt(inputMae);
   });
 
+
   var x = d3.scaleLinear()
-      .domain([0, 10])
+      .domain([0, 11])
       .range([0, width2]);
 
     viz2.append("g")
@@ -307,7 +308,9 @@ function draw_histogram(selectedYear) {
       .selectAll("text")
         .style("text-anchor", "end")
         .style("fill", "white")
-        .style("font-size", "12px");
+        .style("font-size", "12px")
+        .attr("dx", "2em");
+
 
     var histogram = d3.histogram()
       .value(function(d) { return d.apgar1; })

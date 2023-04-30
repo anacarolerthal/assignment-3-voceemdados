@@ -45,6 +45,7 @@ var colorScale = d3.scaleLinear()
       selectedYear = this.value;
       getData(selectedYear);
       d3.select("#year-value").text(selectedYear);
+      inputData = "all";
   
     })
     .on("change", function() {
@@ -223,9 +224,13 @@ getData(selectedYear);
   d3.select("#inputData")
     .on("change", function() {
       inputData = this.value.toString();
+      selectedYear = inputData.substring(0,4);
+      d3.select("#year-value").text(selectedYear);
+      d3.select("#year").property("value", selectedYear);
       console.log(inputData);
       document.getElementById("data-value").textContent = inputData;
       draw_histogram(selectedYear);
+      getData(selectedYear);
 });
 
 // listener mother age

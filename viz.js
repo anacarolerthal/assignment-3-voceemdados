@@ -186,13 +186,22 @@ getData(selectedYear);
 // Listeners to other inputs
 {
   // listener peso
-  d3.select("#inputPeso")
+  d3.select("#inputPesoMax")
     .on("input", function() {
-    inputPeso = this.value;
+    inputPesoMax = this.value;
   })    
     .on("change", function() {
     draw_histogram(selectedYear);
   });
+
+  d3.select("#inputPesoMin")
+    .on("input", function() {
+    inputPesoMin = this.value;
+  })
+    .on("change", function() {
+    draw_histogram(selectedYear);
+  });
+
 
   // listener sexo
   d3.select("#inputSexo")
@@ -240,7 +249,7 @@ function draw_histogram(selectedYear) {
     return d.id_municipio == cityId;
   });
   data = data.filter(function(d) {
-    return d.peso == parseInt(inputPeso);
+    return d.peso >= inputPesoMin && d.peso <= inputPesoMax;
   });
   data = data.filter(function(d) {
     return d.sexo == inputSexo;

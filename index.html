@@ -85,17 +85,10 @@
 						<h6> Insira aqui seu peso ao nascer: </h6>
 						<div class="d-flex justify-content-center">
 							<div class="input-group w-auto">
-								<input
-								  id = "inputPeso"
-								  type="text"
-								  class="form-control"
-								  placeholder="Peso"
-								  aria-label="Peso"
-								  aria-describedby="button-addon1"
-								/>
-								<button class="btn btn-primary" type="button" id="button-addon1">
-									Inserir
-								</button>
+								<!-- adds 100 by 100 -->
+								<input type="range" min="0" max="5000" value="0" class="slider" id="inputPesoMin" step="100">
+								<input type="range" min="0" max="5000" value="0" class="slider" id="inputPesoMax" step="100">
+								<p> <span id="peso-value"></span> </p>
 							</div>
 						</div>
 					</div>

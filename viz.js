@@ -155,6 +155,7 @@ function draw_map(error,d){
           //sets the cityId to the selected city
           cityId = d.properties.id_municipio;
           draw_histogram(selectedYear);
+          d3.select(".dark-article").node().scrollIntoView({block: "start" ,behavior: "smooth"});
           console.log(cityId);
         })
     .append("svg:title")

@@ -27,45 +27,49 @@ var colorScale = d3.scaleLinear()
 
 //Sets default year and the listener for the year update
 {
-var selectedYear = 2020;
-
-d3.select("#year") // listen for changes to the year dropdown menu
-.on("input", function() { 
-    selectedYear = this.value;
-    getData(selectedYear);
-    draw_histogram(selectedYear);
-
-  });
-
-d3.select("#play-button")
-.on("click", function() {
-  //turns on if off and vice versa
-  var button = d3.select(this);
-  if (button.text() == "Play") {
-    button.text("Stop");
-    interval = setInterval(step, 1000);
-  } else {
-    button.text("Play");
-    clearInterval(interval);
-  }
-
-  //adds 1 to selected year
-  function step() {
-    if (selectedYear == 2020) {
-      selectedYear = 1997;
-    }
-    selectedYear = parseInt(selectedYear) + 1;
-    d3.select("#year")
-    .property("value", selectedYear);
-    getData(selectedYear);
-    draw_histogram(selectedYear);
-    if (selectedYear == 2020) {
-      clearInterval(interval);
+  var selectedYear = 2020;
+  
+  d3.select("#year-value").text(selectedYear);
+  
+  d3.select("#year") // listen for changes to the year dropdown menu
+  .on("input", function() { 
+      selectedYear = this.value;
+      getData(selectedYear);
+      draw_histogram(selectedYear);
+      d3.select("#year-value").text(selectedYear);
+  
+    });
+  
+  d3.select("#play-button")
+  .on("click", function() {
+    //turns on if off and vice versa
+    var button = d3.select(this);
+    if (button.text() == "Play") {
+      button.text("Stop");
+      interval = setInterval(step, 1000);
+    } else {
       button.text("Play");
+      clearInterval(interval);
     }
+  
+    //adds 1 to selected year
+    function step() {
+      if (selectedYear == 2020) {
+        selectedYear = 1997;
+      }
+      selectedYear = parseInt(selectedYear) + 1;
+      d3.select("#year")
+      .property("value", selectedYear);
+      getData(selectedYear);
+      draw_histogram(selectedYear);
+      if (selectedYear == 2020) {
+        clearInterval(interval);
+        button.text("Play");
+      }
+      d3.select("#year-value").text(selectedYear);
+    }
+  });
   }
-});
-}
 
 // set continuous legend for color scale from 0 to 10
 {var legend = viz.append("g")

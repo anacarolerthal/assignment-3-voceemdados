@@ -323,13 +323,14 @@ function draw_histogram(selectedYear) {
       .style("font-size", "15px")
       .text("Histograma do Apgar 1 em "+ selectedYear);
 
+    city_showing = cityId == 0 ? "Todos" : data[0].nome_municipio;
     viz2.append("text")
       .attr("x", (width2 / 2))
       .attr("y", 20)
       .attr("text-anchor", "middle")
       .style("fill", "white")
       .style("font-size", "15px")
-      .text("Município de " + data[0].nome_municipio);
+      .text("Município de " + city_showing);
 
     viz2.append("text")
       .attr("x", (width2 / 2))

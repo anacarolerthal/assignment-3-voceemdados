@@ -305,12 +305,7 @@ function draw_histogram(selectedYear) {
   });
 
   //if the data is empty, show a message
-  if (data.length == 0) {
-    alert("Poxa, não há nenhum bebê na base de dados com essa seleção de filtros :( Tente verificar seus dados!");
-  }
-  if (data.length == 1) {
-    alert("Você se encontrou! Com os filtros selecionados, restou apenas um bebê possível, e se você estava inserindo seus dados, esse deve ser você! Seu Apgar1 é de: " + data[0].apgar1);
-  }
+
 
 
   var x = d3.scaleLinear()
@@ -395,6 +390,13 @@ function draw_histogram(selectedYear) {
       .style("fill", "white")
       .style("font-size", "13px")
       .text("Número de nascidos vivos");
+
+    if (data.length == 0) {
+      alert("Poxa, não há nenhum bebê na base de dados com essa seleção de filtros :( Tente verificar seus dados!");
+    }
+    if (data.length == 1) {
+      alert("Você se encontrou! Com os filtros selecionados, restou apenas um bebê possível, e se você estava inserindo seus dados, esse deve ser você! Seu Apgar1 é de: " + data[0].apgar1);
+    }
 
   });
 

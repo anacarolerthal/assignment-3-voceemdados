@@ -161,7 +161,7 @@ function draw_map(error,d){
         })
 
         .attr("stroke", "transparent")
-        .attr("stroke-opacity", 0.01)
+        .attr("stroke-width", "2px")
         .on("mouseover", function(d) {
             //select all the paths and set their opacity to 0.5
             d3.selectAll("path").style("opacity", 0.5);
@@ -174,6 +174,9 @@ function draw_map(error,d){
         })
         .on("click", function(d) {
           //sets the cityId to the selected city
+          d3.selectAll("path").attr("stroke", "transparent");
+          d3.select(this).attr("stroke", "red");
+          d3.select(this).attr("stroke-width", "2px");
           cityId = d.properties.id_municipio;
           draw_histogram(selectedYear);
           d3.select(".dark-article").node().scrollIntoView({block: "start" ,behavior: "smooth"});

@@ -391,12 +391,20 @@ function draw_histogram(selectedYear) {
       .style("font-size", "13px")
       .text("Número de nascidos vivos");
 
+    //wait .1 seconds to show the message
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+  }
+    sleep(250).then(() => {
+    
     if (data.length == 0) {
       alert("Poxa, não há nenhum bebê na base de dados com essa seleção de filtros :( Tente verificar seus dados!");
     }
     if (data.length == 1) {
       alert("Você se encontrou! Com os filtros selecionados, restou apenas um bebê possível, e se você estava inserindo seus dados, esse deve ser você! Seu Apgar1 é de: " + data[0].apgar1);
     }
+    });
+
 
   });
 

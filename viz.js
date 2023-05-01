@@ -126,6 +126,24 @@ legend.append("text")
 .style("fill", "white")
 .style("font-size", "15px")
 .text("Média do Apgar 1 por município");
+
+// legend for na values
+legend.append("rect")
+.attr("x", width - 70)
+.attr("y", height - 80)
+.attr("width", 30)
+.attr("height", 10)
+.attr("class", "rect")
+.style("fill", "#6B6066")
+
+legend.append("text")
+.attr("x", width - 55)
+.attr("y", height - 85)
+.style("text-anchor", "middle")
+.style("fill", "white")
+.style("font-size", "10px")
+.text("NA");
+
 }
 
 //Draws the map
@@ -139,7 +157,7 @@ function draw_map(error,d){
         .attr("d", path)
         .attr("fill", function(d) {
             var dataPoints = data.get(d.properties.id_municipio);
-            return dataPoints ? colorScale(dataPoints.apgar1) : "#ccc";
+            return dataPoints ? colorScale(dataPoints.apgar1) : "#6B6066";
         })
 
         .attr("stroke", "transparent")

@@ -47,7 +47,6 @@ h6{
   padding-bottom: 2px;
 }
 
-
 .topmargin {
      margin-top: 3cm;
   }
@@ -94,8 +93,6 @@ h6{
 
 /* reduce size from btn btn-link bootstrap */
 
-
-
 .btn { 
   text-decoration: none;
   color: black;
@@ -122,4 +119,27 @@ h6{
 
 .modal-body {
   color: #000000;
+}
+
+.modal-header {
+  padding:9px 15px;
+  border-bottom:1px solid #eee;
+  background-color: #7058BD;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+
+.buttonup{
+  background-color: #7058BD;
+  color: #FFFFFF;
+  border: 3px;
+  border-radius: 5px;
+  border-color: #2C2157;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
 }

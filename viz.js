@@ -189,17 +189,28 @@ getData(selectedYear);
 // Listeners to other inputs
 {
   // listener peso
-  d3.select("#inputPesoMax")
-    .on("input", function() {
+  d3.select("#inputPesoMax1")
+    .on("change", function() {
+    inputPesoMax = this.value;
+    draw_histogram(selectedYear);
+  });
+  d3.select("#inputPesoMax2")
+    .on("change", function() {
     inputPesoMax = this.value;
     draw_histogram(selectedYear);
   });
 
-  d3.select("#inputPesoMin")
-    .on("input", function() {
+  d3.select("#inputPesoMin2")
+    .on("change", function() {
     inputPesoMin = this.value;
     draw_histogram(selectedYear);
   });
+  d3.select("#inputPesoMin2")
+  .on("change", function() {
+  inputPesoMin = this.value;
+  draw_histogram(selectedYear);
+});
+
 
 
   // listener sexo
@@ -323,7 +334,7 @@ function draw_histogram(selectedYear) {
 
     var bins = histogram(data);
     var y = d3.scaleLinear()
-      .range([height2, 0]);
+      .range([height2, 30]);
     y.domain([0, d3.max(bins, function(d) { return d.length; })]);
     //y label
     viz2.append("text")

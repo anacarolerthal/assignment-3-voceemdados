@@ -200,7 +200,7 @@ getData(selectedYear);
     draw_histogram(selectedYear);
   });
 
-  d3.select("#inputPesoMin2")
+  d3.select("#inputPesoMin1")
     .on("change", function() {
     inputPesoMin = this.value;
     draw_histogram(selectedYear);

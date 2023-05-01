@@ -192,16 +192,12 @@ getData(selectedYear);
   d3.select("#inputPesoMax")
     .on("input", function() {
     inputPesoMax = this.value;
-  })    
-    .on("change", function() {
     draw_histogram(selectedYear);
   });
 
   d3.select("#inputPesoMin")
     .on("input", function() {
     inputPesoMin = this.value;
-  })
-    .on("change", function() {
     draw_histogram(selectedYear);
   });
 
@@ -269,7 +265,7 @@ function draw_histogram(selectedYear) {
     return d.id_municipio == cityId;
   });
   data = data.filter(function(d) {
-    return d.peso >= inputPesoMin && d.peso <= inputPesoMax;
+    return parseInt(d.peso) >= parseInt(inputPesoMin) && parseInt(d.peso) <= parseInt(inputPesoMax);
   });
   data = data.filter(function(d) {
     if (inputSexo == "all") {
